@@ -20,6 +20,8 @@ public class Arm{
 		}
 		else if(rightStick.getTrigger()){
 		   bestTalonEber.set(-.7);
+		}else{
+			bestTalonEber.set(0);
 		}
 	}
 

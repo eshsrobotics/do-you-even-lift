@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
     	boolean tooBool4Skewl = true;
     	if(tooBool4Skewl == true){
     	  myRobot.setSafetyEnabled(true);
-    	  myRobot.tankDrive(leftStick, rightStick);
+    	  myRobot.tankDrive(leftStick.getY(), -rightStick.getY());
     	  
     	  myArm.Move();
     	  
@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
     	  //if(leftStick.getTrigger()){
     		// myRobot.tankDrive(- z*length,z*length);
     	  //}else{
-    		 myRobot.tankDrive(leftStick.getY() - leftStick.getZ()*.7, leftStick.getY() + leftStick.getZ()*.7);
+    		 //myRobot.tankDrive(leftStick.getY() - leftStick.getZ()*.7, leftStick.getY() + leftStick.getZ()*.7);
     	  //}
         }
     	else{
