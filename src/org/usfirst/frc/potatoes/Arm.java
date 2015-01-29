@@ -8,8 +8,8 @@ public class Arm{
 	private Talon bestTalonEber;
     
     
-	public Arm(int talonPort5, Joystick stick1, Joystick stick2){
-		bestTalonEber = new Talon(talonPort5);
+	public Arm(int talonPort, Joystick stick1, Joystick stick2){
+		bestTalonEber = new Talon(talonPort);
 		leftStick = stick1;
 		rightStick = stick2;
 		

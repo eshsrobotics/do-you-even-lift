@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	//myOmniDrive = new Omni(1, 0, 0, 0, 0);
-    	myArm = new Arm(2, leftStick, rightStick);
+    	
     	server = CameraServer.getInstance();
          server.setQuality(50);
          //the camera name (ex "cam0") can be found through the roborio web interface
@@ -44,7 +44,8 @@ public class Robot extends IterativeRobot {
          leftStick = new Joystick(0);
          rightStick = new Joystick(1);
          gyro = new Gyro(1);             // Gyro on Analog Channel 1
-        
+         // joysticks must be initialized before Arm()
+         myArm = new Arm(2, leftStick, rightStick);
        
     }
 
@@ -79,18 +80,18 @@ public class Robot extends IterativeRobot {
     	  
     	  myArm.Move();
     	  
-    	  double degrees = gyro.getAngle();
-    	  double radians = Math.toRadians(degrees);
+    	  //double degrees = gyro.getAngle();
+    	 // double radians = Math.toRadians(degrees);
     	 
     	  
-    	  double z = Math.atan2(leftStick.getY(),leftStick.getX())-radians+3.14/2;
-    	  double length = leftStick.getY()*leftStick.getY()+leftStick.getX()*leftStick.getX();
+    	  //double z = Math.atan2(leftStick.getY(),leftStick.getX())-radians+3.14/2;
+    	 // double length = leftStick.getY()*leftStick.getY()+leftStick.getX()*leftStick.getX();
     	
-    	  if(leftStick.getTrigger()){
-    		 myRobot.tankDrive(- z*length,z*length);
-    	  }else{
+    	  //if(leftStick.getTrigger()){
+    		// myRobot.tankDrive(- z*length,z*length);
+    	  //}else{
     		 myRobot.tankDrive(leftStick.getY() - leftStick.getZ()*.7, leftStick.getY() + leftStick.getZ()*.7);
-    	  }
+    	  //}
         }
     	else{
     	  //myOmniDrive.Drive(leftStick.getX(),leftStick.getY(),leftStick.getZ());
