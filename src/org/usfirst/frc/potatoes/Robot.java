@@ -1,11 +1,12 @@
 package org.usfirst.frc.potatoes;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
-
 
 
 
@@ -21,6 +22,8 @@ public class Robot extends IterativeRobot {
     Joystick leftStick;  // set to ID 1 in DriverStation
     Joystick rightStick; // set to ID 2 in DriverStation
     CameraServer server;
+    DigitalInput a;
+    Counter b;
   
     
     
@@ -45,7 +48,11 @@ public class Robot extends IterativeRobot {
          rightStick = new Joystick(1);
          gyro = new Gyro(1);             // Gyro on Analog Channel 1
          // joysticks must be initialized before Arm()
-         myArm = new Arm(2, leftStick, rightStick);
+         myArm = new Arm(2, 1, 2, 3, 4, leftStick, rightStick);
+        
+         
+         
+        
        
     }
 
@@ -75,8 +82,21 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	boolean tooBool4Skewl = true;
     	if(tooBool4Skewl == true){
+    	  double x = 1;
+    	  if(leftStick.getThrottle()>.5){
+    		  x= 0.5;
+    	  }
+    	  else if(leftStick.getThrottle()>0.0){
+    		  x= 0.7;
+    	  }
+    	  else if(leftStick.getThrottle()>-0.5){
+    		  x= 0.8;
+    	  }
+    	  else if(leftStick.getThrottle()>=-1){
+    		  x= .9;
+    	  }
     	  myRobot.setSafetyEnabled(true);
-    	  myRobot.tankDrive(leftStick.getY(), -rightStick.getY());
+    	  myRobot.tankDrive(leftStick.getY()*x, -rightStick.getY()*x);
     	  
     	  myArm.Move();
     	  
