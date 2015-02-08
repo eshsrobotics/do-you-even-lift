@@ -7,7 +7,7 @@ public class Omni {
 	private Gyro gyro;/**creates gyro**/
 	private Talon talonA, talonB,/**creates talons**/
 				  talonC, talonD;
-	double k = .7;/**the constant**/
+	double k = 1;/**the constant**/
 	
 	public Omni(int gyroPort, int talonPort1, int talonPort2, int talonPort3, int talonPort4){/**recieves input for the gyro and talon ports**/
 		 this(gyroPort, talonPort1, talonPort2, talonPort3, talonPort4, .7);/**this() refers to the object being called**/
@@ -28,12 +28,27 @@ public class Omni {
 	}
     
 	public void Drive(double x, double y, double z){
-    	double radians = Math.toRadians(gyro.getAngle());
+    	/*double radians = Math.toRadians(gyro.getAngle());
     	double f = ((k*y)*Math.cos((Math.PI/4)-radians)-(k*x)*Math.sin((Math.PI/4)-radians))/Math.cos(2*radians); //f is the magnitude of talonB + talonC
     	double e = ((k*y)*Math.sin((Math.PI/4)-radians)+(k*x)*Math.cos((Math.PI/4)-radians))/-Math.cos(2*radians); //e is the magnitude of talonA + talonD
-    	talonA.set((e/2) + z);/**set() sets pwm values. anywhere between -1 and 1 **/
+    	
+    	talonA.set((e/2) + z);//set() sets pwm values. anywhere between -1 and 1
     	talonD.set((e/2) - z);
-    	talonB.set((f/2) + z);
-    	talonC.set((f/2) - z);
+    	talonB.set((f/2) - z);
+    	talonC.set((f/2) + z);
+    	*/
+		talonA.set((x) + z);//set() sets pwm values. anywhere between -1 and 1
+    	talonD.set((x) - z);
+    	talonB.set((y) - z);
+    	talonC.set((y) + z);
+		
+    	
+    	System.out.println("Talon A" + talonA.get());
+    	
+    	System.out.println("Talon B " + talonB.get());
+    	
+    	System.out.println("Talon C " + talonC.get());
+    	
+    	System.out.println("Talon D " + talonD.get());
 	}
 }
