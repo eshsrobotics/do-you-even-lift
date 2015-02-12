@@ -39,13 +39,5 @@ public class Omni {
     	talonB.set(((y) + z)*bFactor);
     	talonC.set(((-y) + z)*cFactor);
 		
-    	
-    	System.out.println("Talon A" + talonA.get());
-    	
-    	System.out.println("Talon B " + talonB.get());
-    	
-    	System.out.println("Talon C " + talonC.get());
-    	
-    	System.out.println("Talon D " + talonD.get());
 	}
 }
