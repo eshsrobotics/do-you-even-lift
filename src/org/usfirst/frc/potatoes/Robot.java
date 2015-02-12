@@ -47,8 +47,11 @@ public class Robot extends IterativeRobot {
     		theta += (leftStick.getZ()- deadBand)*5;
     	}
     	double error = gyro.getAngle()-theta;
+    	 
+    	// Previously we had "error /= 10" here.  Know what happened?  Everyone screamed and hid their children.  
     	error /= 100;
-    	// clamping the value of error. so we donat spin uncontrollably
+    	
+    	// clamping the value of error. so we don't spin uncontrollably
     	if (error < -maxError) {
     		error = -maxError;
     	}
@@ -56,8 +59,8 @@ public class Robot extends IterativeRobot {
     		error = maxError;
     	}
     	
-    	
-    	omni.drive(leftStick.getX(), leftStick.getY(), error);
+    	//flipped x direction to negative to ensure that robot is moving in correlation with joystick
+    	omni.drive(leftStick.getY(), -leftStick.getX(), error);
 
     	System.out.println(error);
     }

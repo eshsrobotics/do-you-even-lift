@@ -41,3 +41,9 @@ public class Omni {
 		
 	}
 }
+/* TODO:
+ - Make all the motors move in the right direction
+ - Calibrate all motors
+ - Make the front actually the front
+ 
+*/
