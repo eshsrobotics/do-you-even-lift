@@ -12,7 +12,7 @@ public class Robot extends IterativeRobot {
     double theta;
     Gyro gyro;
     double sensitivity;
-    final static double deadBand = 0.4;
+    final static double deadBand = 0.2;
     final static double maxError = 0.3 ;
     
     public void robotInit() {
@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
     	omni = new Omni(gyro, 0, 1, 2, 3);
     	
     	//motor, 
-    	arm = new Arm(4,0,1);
+    	arm = new Arm(1,1,0);
     	
     	//joystick
         leftStick = new Joystick(0);
@@ -36,10 +36,11 @@ public class Robot extends IterativeRobot {
     }
      
     public void teleopInit() {
+    	gyro.reset();//resets the Gyro object  gyro whenever teleop is initialized
+    	theta = 0;
     }
      
     public void teleopPeriodic() {
-    	
     	if (leftStick.getZ() < -deadBand) {
     		theta += (leftStick.getZ() + deadBand)*5;
     	}
@@ -48,7 +49,7 @@ public class Robot extends IterativeRobot {
     	}
     	double error = gyro.getAngle()-theta;
     	 
-    	// Previously we had "error /= 10" here.  Know what happened?  Everyone screamed and hid their children.  
+    	// Previously we had "error /= 10" here.  Know what happened?  Everyone screamed and hid their children.  err ma gerrd
     	error /= 100;
     	
     	// clamping the value of error. so we don't spin uncontrollably
@@ -58,11 +59,15 @@ public class Robot extends IterativeRobot {
     	else if(error > maxError) {
     		error = maxError;
     	}
-    	
     	//flipped x direction to negative to ensure that robot is moving in correlation with joystick
-    	omni.drive(leftStick.getY(), -leftStick.getX(), error);
-
-    	System.out.println(error);
+    	omni.drive(-leftStick.getY(), leftStick.getX() , error);
+    	arm.move(leftStick);
+    	
+    	/*System.out.println("Y Stick is " + leftStick.getY() + "\n");
+    	System.out.println("X Stick is " + leftStick.getX());
+    	*/
+    	
+    	
     }
      
     public void testPeriodic() {	    

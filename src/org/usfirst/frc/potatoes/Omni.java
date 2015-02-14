@@ -32,18 +32,27 @@ public class Omni {
 	}
     
 	public void drive(double x, double y, double z){
-    	
+		double radians = Math.toRadians(gyro.getAngle()) - .783;//created new value to get the gyro angle, change to radians, and subtract .783
+		double xPrime =  (y*Math.sin(radians)-(x*Math.cos(radians)));
+    	double yPrime = -(y*Math.cos(radians)+(x*Math.sin(radians)));
 		
-		talonA.set(((x) + z)*aFactor);//set() sets pwm values. anywhere between -1 and 1
-    	talonD.set(((-x) + z)*dFactor);
-    	talonB.set(((y) + z)*bFactor);
-    	talonC.set(((-y) + z)*cFactor);
+		talonA.set((( xPrime) + z)*aFactor);//set() sets pwm values. anywhere between -1 and 1
+    	talonD.set(((-xPrime) + z)*dFactor);
+    	talonB.set((( yPrime) + z)*bFactor);
+    	talonC.set(((-yPrime) + z)*cFactor);
+    	System.out.println("angle be" + gyro.getAngle());
 		
 	}
 }
 /* TODO:
- - Make all the motors move in the right direction
  - Calibrate all motors
- - Make the front actually the front
+ sort of- make the front the wall
+ nahhh- clean up wiring
+ - if arm complete try to implement
+ tested-		test actuator
+ - end of saturday weigh all the components; arm, frame, board, etc.
+ -implement POV precision movement
+ -implement throttle for speed
+ 
  
 */
