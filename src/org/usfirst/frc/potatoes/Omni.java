@@ -45,14 +45,18 @@ public class Omni {
 	}
 }
 /* TODO:
- - Calibrate all motors
- sort of- make the front the wall
- nahhh- clean up wiring
- - if arm complete try to implement
- tested-		test actuator
- - end of saturday weigh all the components; arm, frame, board, etc.
- -implement POV precision movement
- -implement throttle for speed
+ - Calibrate all motors				---
+ - make the front the wall			---sort of but backwards when rotated 90 degrees
+ - clean up wiring					---							
+ - if arm complete try to implement	---
+ -		test actuator               ---tested actuator not yet mounted
+ - implement POV precision movement ---
+  - implement throttle for speed	---
+ - end of saturday 					---
+ 	weigh all the components; 
+ 	arm, frame, board, etc.
+ 
+
  
  
 */
