@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
 
 public class Robot extends IterativeRobot {
     Joystick leftStick;
@@ -12,8 +13,9 @@ public class Robot extends IterativeRobot {
     double theta;
     Gyro gyro;
     double sensitivity;
-    final static double deadBand = 0.2;
+    final static double deadBand = 0.1;
     final static double maxError = 0.3 ;
+    boolean down = false;
     
     public void robotInit() {
     	//enable the camera
@@ -22,14 +24,18 @@ public class Robot extends IterativeRobot {
         server.startAutomaticCapture("cam0");
         
         gyro = new Gyro(0);
+        leftStick = new Joystick(0);
         //gyro, fl, fr, bl, br
-    	omni = new Omni(gyro, 0, 1, 2, 3);
+    	omni = new Omni(gyro, 0, 1, 2, 3, leftStick);
     	
     	//motor, 
     	arm = new Arm(1,1,0);
     	
     	//joystick
-        leftStick = new Joystick(0);
+        
+        
+       
+       
     }
     
     public void autonomousPeriodic() {
@@ -38,8 +44,11 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
     	gyro.reset();//resets the Gyro object  gyro whenever teleop is initialized
     	theta = 0;
+    	
     }
-     
+
+
+    
     public void teleopPeriodic() {
     	if (leftStick.getZ() < -deadBand) {
     		theta += (leftStick.getZ() + deadBand)*5;
@@ -60,17 +69,65 @@ public class Robot extends IterativeRobot {
     		error = maxError;
     	}
     	//flipped x direction to negative to ensure that robot is moving in correlation with joystick
-    	omni.drive(-leftStick.getY(), leftStick.getX() , error);
+    	
     	arm.move(leftStick);
+    	omni.drive(-leftStick.getY(), leftStick.getX() , error);
+    	if (leftStick.getTrigger()){
+    		gyro.reset();//resets the Gyro object  gyro whenever teleop is initialized
+    		theta = 0;
+    	}
     	
-    	/*System.out.println("Y Stick is " + leftStick.getY() + "\n");
-    	System.out.println("X Stick is " + leftStick.getX());
-    	*/
+    	System.out.println(gyro.getAngle());
     	
+        if(leftStick.getPOV() == 0) {
+    		omni.drive(1, 0, 0);
+    	}
+    	else if (leftStick.getPOV() == 90 ){
+    		omni.drive(0, 1, 0);
+    	}
     	
+    	else if (leftStick.getPOV() == 180){
+    		omni.drive(-1, 0, 0);
+    	}
+    	
+    	else if (leftStick.getPOV() == 270){
+    		omni.drive(0, -1, 0);
+    	}
+        
+
+    	else if(leftStick.getRawButton(3)){
+    		if(leftStick.getRawButton(3) != down){
+    			theta += 180;
+    			
+    		}
+    	}
+        
+    	else if(leftStick.getRawButton(8)){
+    		theta = 0;
+    	}
+        
+		down = leftStick.getRawButton(3);
     }
-     
-    public void testPeriodic() {	    
+    
+    public void testPeriodic() {	   
+    	
     }
 }
+
+        
+/* code for talon callibration (button 11 = max, button 12 = min)
+    if(leftStick.getRawButton(11))
+       omni.drive(1, 0 ,0);
+   
+    else if (leftStick.getRawButton(12))
+	   omni.drive(-1,0,0);
+	   */
+
+/*System.out.println("Y Stick is " + leftStick.getY() + "\n");
+System.out.println("X Stick is " + leftStick.getX());
+*/
+    	
+    	
+  
+     
 
