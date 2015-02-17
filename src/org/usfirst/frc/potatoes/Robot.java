@@ -13,9 +13,10 @@ public class Robot extends IterativeRobot {
     double theta;
     Gyro gyro;
     double sensitivity;
-    final static double deadBand = 0.1;
-    final static double maxError = 0.3 ;
+    final static double deadBand = 0.1, maxError = 0.3 ;
     boolean down = false;
+    Debounce turn;
+    Calibration calibration;
     
     public void robotInit() {
     	//enable the camera
@@ -32,7 +33,7 @@ public class Robot extends IterativeRobot {
     	arm = new Arm(1,1,0);
     	
     	//joystick
-        
+        calibration = new Calibration(gyro);
         
        
        
@@ -43,21 +44,30 @@ public class Robot extends IterativeRobot {
      
     public void teleopInit() {
     	gyro.reset();//resets the Gyro object  gyro whenever teleop is initialized
-    	theta = 0;
+    	theta = 0; //Want theta
+    	calibration.reset();
     	
     }
 
 
     
     public void teleopPeriodic() {
+    	
+    	//turn.press(leftStick.getRawButton(11));
+    	
+    	calibration.press(leftStick.getTrigger());
+    	double error = calibration.getError(); //due to drift
+    	
+
+    	System.out.println(gyro.getAngle()-error);
+    	
     	if (leftStick.getZ() < -deadBand) {
     		theta += (leftStick.getZ() + deadBand)*5;
     	}
     	else if (leftStick.getZ() > deadBand) {
     		theta += (leftStick.getZ()- deadBand)*5;
     	}
-    	double error = gyro.getAngle()-theta;
-    	 
+    	error = gyro.getAngle()-error-theta;
     	// Previously we had "error /= 10" here.  Know what happened?  Everyone screamed and hid their children.  err ma gerrd
     	error /= 100;
     	
@@ -72,12 +82,8 @@ public class Robot extends IterativeRobot {
     	
     	arm.move(leftStick);
     	omni.drive(-leftStick.getY(), leftStick.getX() , error);
-    	if (leftStick.getTrigger()){
-    		gyro.reset();//resets the Gyro object  gyro whenever teleop is initialized
-    		theta = 0;
-    	}
-    	
-    	System.out.println(gyro.getAngle());
+
+
     	
         if(leftStick.getPOV() == 0) {
     		omni.drive(1, 0, 0);
@@ -93,20 +99,15 @@ public class Robot extends IterativeRobot {
     	else if (leftStick.getPOV() == 270){
     		omni.drive(0, -1, 0);
     	}
+ 	
+    	if(leftStick.getRawButton(8)){
+    		if(theta%360 > 180.0)
+    			theta += theta%360-180;
+    		else
+    			theta -= theta%360;
+    	}
         
 
-    	else if(leftStick.getRawButton(3)){
-    		if(leftStick.getRawButton(3) != down){
-    			theta += 180;
-    			
-    		}
-    	}
-        
-    	else if(leftStick.getRawButton(8)){
-    		theta = 0;
-    	}
-        
-		down = leftStick.getRawButton(3);
     }
     
     public void testPeriodic() {	   

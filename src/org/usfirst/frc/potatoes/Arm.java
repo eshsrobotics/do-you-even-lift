@@ -15,7 +15,7 @@ public class Arm{
 	}
 	
 	public void move(Joystick l){
-		move(l.getRawButton(6),l.getRawButton(4));// for buttons number six and 4 on the top of the joystick
+		move(l.getRawButton(4),l.getRawButton(6));// for buttons number six and 4 on the top of the joystick
 	}
 	
     public void move(boolean up,boolean down){
