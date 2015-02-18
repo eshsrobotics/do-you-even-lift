@@ -12,11 +12,9 @@ public class PID {
     
     public double getValue(double error){
     	sum += error;
-    	double out = k1 * sum + k2 (error - previous/*change in height*/) + k3 *error;
+    	double out = k1*sum + k2*(error - previous/*change in height*/) + k3*error;
+    	//System.out.println("sum: " + k1*sum +  " delta:"+k2*(error - previous/*change in height*/) + " p:" +k3*error+"error:"+error);
     	previous = error;
     	return out;
-    	
     }
-	
-	
 }

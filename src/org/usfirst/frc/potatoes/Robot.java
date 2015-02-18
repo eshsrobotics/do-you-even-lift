@@ -14,9 +14,11 @@ public class Robot extends IterativeRobot {
     Gyro gyro;
     double sensitivity;
     final static double deadBand = 0.1, maxError = 0.3 ;
-    boolean down = false;
+    boolean leftDown = false;
+    boolean rightDown = false;
     Debounce turn;
     Calibration calibration;
+    PID turning;
     
     public void robotInit() {
     	//enable the camera
@@ -35,7 +37,7 @@ public class Robot extends IterativeRobot {
     	//joystick
         calibration = new Calibration(gyro);
         
-       
+       turning = new PID(.003,.5,.2);
        
     }
     
@@ -59,54 +61,55 @@ public class Robot extends IterativeRobot {
     	double error = calibration.getError(); //due to drift
     	
 
-    	System.out.println(gyro.getAngle()-error);
+    	//System.out.println(gyro.getAngle()-error);
     	
     	if (leftStick.getZ() < -deadBand) {
-    		theta += (leftStick.getZ() + deadBand)*5;
+    		theta += (leftStick.getZ() + deadBand);
     	}
     	else if (leftStick.getZ() > deadBand) {
-    		theta += (leftStick.getZ()- deadBand)*5;
+    		theta += (leftStick.getZ()- deadBand);
     	}
     	error = gyro.getAngle()-error-theta;
     	// Previously we had "error /= 10" here.  Know what happened?  Everyone screamed and hid their children.  err ma gerrd
-    	error /= 100;
+    	error /= 10;
     	
     	// clamping the value of error. so we don't spin uncontrollably
-    	if (error < -maxError) {
+    	/*if (error < -maxError) {
     		error = -maxError;
     	}
     	else if(error > maxError) {
     		error = maxError;
-    	}
+    	} */
     	//flipped x direction to negative to ensure that robot is moving in correlation with joystick
     	
     	arm.move(leftStick);
-    	omni.drive(-leftStick.getY(), leftStick.getX() , error);
-
-
+    	error = turning.getValue(error);
+    	omni.drive(-leftStick.getY(), leftStick.getX(),error);
+    	
     	
         if(leftStick.getPOV() == 0) {
-    		omni.drive(1, 0, 0);
+    		omni.drive(1,0, error);
     	}
     	else if (leftStick.getPOV() == 90 ){
-    		omni.drive(0, 1, 0);
+    		omni.drive(0, 1, error);
     	}
     	
     	else if (leftStick.getPOV() == 180){
-    		omni.drive(-1, 0, 0);
+    		omni.drive(-1, 0, error);
     	}
     	
     	else if (leftStick.getPOV() == 270){
-    		omni.drive(0, -1, 0);
+    		omni.drive(0, -1, error);
     	}
- 	
+        
+        /*
     	if(leftStick.getRawButton(8)){
     		if(theta%360 > 180.0)
     			theta += theta%360-180;
     		else
     			theta -= theta%360;
     	}
-        
+        */
 
     }
     

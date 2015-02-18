@@ -10,8 +10,7 @@ public class Omni {
 	private SpeedController talonA, talonB,
 				            talonC, talonD;
 	private Joystick leftStick;
-	
-	double k;
+
 	double aFactor = 1.0;
 	double bFactor = 1.0; 
 	double cFactor = 1.0;
@@ -32,7 +31,6 @@ public class Omni {
 		 talonB = frontRight;
 		 talonC = backLeft;
 		 talonD = backRight;
-		 this.k = k;
 		 
 		 
 	}
@@ -40,7 +38,7 @@ public class Omni {
 	public void drive(double x, double y, double z){
 		
 		
-		double radians = Math.toRadians(0 - gyro.getAngle()) - .783;//created new value to get the gyro angle, change to radians, and subtract .783
+		double radians = - .783;//created new value to get the gyro angle, change to radians, and subtract .783
 		double xPrime =  (y*Math.sin(radians)-(x*Math.cos(radians)));
     	double yPrime = -(y*Math.cos(radians)+(x*Math.sin(radians)));
 		
