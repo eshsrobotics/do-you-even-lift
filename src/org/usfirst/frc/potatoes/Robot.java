@@ -101,7 +101,17 @@ public class Robot extends IterativeRobot {
     	else if (leftStick.getPOV() == 270){
     		omni.drive(0, -1, error);
     	}
-        
+        int ugh = 0;
+        if(leftStick.getRawButton(8)){
+    		
+    		while(ugh<300){	
+    		System.out.println(ugh);
+    		omni.drive(1,0, error);
+        	System.out.println(ugh);
+        	ugh++;
+    	  }
+    	  ugh = 0;
+        }
         /*
     	if(leftStick.getRawButton(8)){
     		if(theta%360 > 180.0)

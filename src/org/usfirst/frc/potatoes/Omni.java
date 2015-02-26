@@ -36,9 +36,10 @@ public class Omni {
 	}
     
 	public void drive(double x, double y, double z){
+	  
 		
 		
-		double radians = - .783;//created new value to get the gyro angle, change to radians, and subtract .783
+		double radians = - .783; //created new value to get the gyro angle, change to radians, and subtract .783
 		double xPrime =  (y*Math.sin(radians)-(x*Math.cos(radians)));
     	double yPrime = -(y*Math.cos(radians)+(x*Math.sin(radians)));
 		
@@ -66,13 +67,14 @@ public class Omni {
 		cFactor = 0.9;
 		dFactor = 0.9;
   	  }
-    	
+      
+
 		talonA.set((( xPrime) + z)*aFactor);//set() sets pwm values. anywhere between -1 and 1
     	talonD.set(((-xPrime) + z)*dFactor);
     	talonB.set((( yPrime) + z)*bFactor);
     	talonC.set(((-yPrime) + z)*cFactor);
+     
     	
-    
     	
     	//System.out.println("angle be" + gyro.getAngle());
     	
@@ -84,7 +86,9 @@ public class Omni {
     	talonC.set(x); 
     	*/
 	}
-}
+    	
+	}
+
 
 
 /* TODO:
