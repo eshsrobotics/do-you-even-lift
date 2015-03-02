@@ -36,7 +36,7 @@ public class Omni {
 	}
     
 	public void drive(double x, double y, double z){
-	  
+		
 		
 		
 		double radians = - .783; //created new value to get the gyro angle, change to radians, and subtract .783
@@ -74,7 +74,11 @@ public class Omni {
     	talonB.set((( yPrime) + z)*bFactor);
     	talonC.set(((-yPrime) + z)*cFactor);
      
+     
+        	
+       }
     	
+       
     	
     	//System.out.println("angle be" + gyro.getAngle());
     	
@@ -87,7 +91,6 @@ public class Omni {
     	*/
 	}
     	
-	}
 
 
 

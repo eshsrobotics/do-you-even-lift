@@ -9,6 +9,8 @@ public class Robot extends IterativeRobot {
     Joystick leftStick;
     CameraServer server;
     Omni omni;
+    Impulse impulse;
+    Impulse negImpulse;
     Arm arm;
     double theta;
     Gyro gyro;
@@ -30,6 +32,12 @@ public class Robot extends IterativeRobot {
         leftStick = new Joystick(0);
         //gyro, fl, fr, bl, br
     	omni = new Omni(gyro, 0, 1, 2, 3, leftStick);
+    	
+    	impulse = new Impulse(omni, 1);
+    	
+    	negImpulse = new Impulse(omni, -1);
+    	
+    	
     	
     	//motor, 
     	arm = new Arm(1,1,0);
@@ -101,17 +109,13 @@ public class Robot extends IterativeRobot {
     	else if (leftStick.getPOV() == 270){
     		omni.drive(0, -1, error);
     	}
-        int ugh = 0;
-        if(leftStick.getRawButton(8)){
-    		
-    		while(ugh<300){	
-    		System.out.println(ugh);
-    		omni.drive(1,0, error);
-        	System.out.println(ugh);
-        	ugh++;
-    	  }
-    	  ugh = 0;
-        }
+        
+        
+    	
+
+        impulse.press(leftStick.getRawButton(8));
+        negImpulse.press(leftStick.getRawButton(7));
+      
         /*
     	if(leftStick.getRawButton(8)){
     		if(theta%360 > 180.0)
@@ -126,6 +130,8 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {	   
     	
     }
+    
+    
 }
 
         
