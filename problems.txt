@@ -7,3 +7,12 @@ Conclusion: wpilib was missing, meaning that the FRC tools have not been loaded 
 
 The procedure to fix this is documentat at the following location: 
 https://wpilib.screenstepslive.com/s/4485/m/13809/l/145002-installing-eclipse-c-java.  In particular, see the "Installing the development plugins - Option 1: Online Install" section.
+
+** Note 2: Problem was not fixed by this deployment (and restarting Eclipse, and waiting for "Installing Java" to complete.
+
+Noticed a discrepancy between "Window -> Preferences -> Java -> Build Path -> Classpath Variables" on the two systems.  On the desktop, these four variables are defined:
+
+	networktables: C:/Users/pltwe5/wpilib/java/current/lib/NetworkTables.jar
+	networktables.sources: C:/Users/pltwe5/wpilib/java/current/lib/NetworkTables-sources.jar
+	wpilib: C:/Users/pltwe5/wpilib/java/current/lib/WPILib.jar
+	wpilib.sources: C:/Users/pltwe5/wpilib/java/current/lib/WPILib-sources.jar
