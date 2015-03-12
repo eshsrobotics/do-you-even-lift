@@ -1,0 +1,6 @@
+[2015-03-11]
+Trying to deploy the code on the laptop.
+
+We noticed under totesmagoats -> Properties -> Java Build Path -> Libraries Tab that "wpilib.sources" was associated with the absolute path to a JAR file (wpilib.jar) on the main coding system but with NOTHING on the laptop.
+
+Conclusion: wpilib was missing, meaning that the FRC tools have not been loaded on the laptop.
