@@ -5,4 +5,5 @@ We noticed under totesmagoats -> Properties -> Java Build Path -> Libraries Tab 
 
 Conclusion: wpilib was missing, meaning that the FRC tools have not been loaded on the laptop.
 
-https://wpilib.screenstepslive.com/s/4485/m/13809/l/145002-installing-eclipse-c-java
+The procedure to fix this is documentat at the following location: 
+https://wpilib.screenstepslive.com/s/4485/m/13809/l/145002-installing-eclipse-c-java.  In particular, see the "Installing the development plugins - Option 1: Online Install" section.
