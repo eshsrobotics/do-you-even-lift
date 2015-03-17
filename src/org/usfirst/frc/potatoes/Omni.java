@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Talon;
 public class Omni {
 	private SpeedController talonA, talonB,
 				            talonC, talonD;
-	private Joystick leftStick;
 
 	double factor = 1.0;
 	
@@ -53,19 +52,7 @@ public class Omni {
 		double radians = - .783; //created new value to get the gyro angle, change to radians, and subtract .783
 		double xPrime =  (y*Math.sin(radians)-(x*Math.cos(radians)));
     	double yPrime = -(y*Math.cos(radians)+(x*Math.sin(radians)));
-		
-        if(leftStick.getThrottle()>.5){
-  		   factor = 0.5;
-  	    }
-  	    else if(leftStick.getThrottle()>0.0){
-  		   factor = 0.7;
-  	    }
-  	    else if(leftStick.getThrottle()>-0.5){
-  		   factor = 0.8;
-  	    }
-  	    else if(leftStick.getThrottle()>=-1){
-  		   factor = 0.9;
-  	    }
+    	
 		talonA.set((( xPrime) + z)*factor);//set() sets pwm values. anywhere between -1 and 1
     	talonD.set(((-xPrime) + z)*factor);
     	talonB.set((( yPrime) + z)*factor);

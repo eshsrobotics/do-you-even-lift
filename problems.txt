@@ -16,3 +16,18 @@ Noticed a discrepancy between "Window -> Preferences -> Java -> Build Path -> Cl
 	networktables.sources: C:/Users/pltwe5/wpilib/java/current/lib/NetworkTables-sources.jar
 	wpilib: C:/Users/pltwe5/wpilib/java/current/lib/WPILib.jar
 	wpilib.sources: C:/Users/pltwe5/wpilib/java/current/lib/WPILib-sources.jar
+
+Looking into whether our Java installation is complete.
+
+** Note 3: If you go to Help -> Installation Details -> [Installed Software tab], you can see that the desktop machine has four plugins installed:
+
+(1) Eclipse IDE for C/C++ Developers 4.4.1.20140925-1820
+(2) Eclipse Java Development Tools 3.10.0.v20140925-0400
+(3) Robot C++ Development 0.1.0.201501221609
+(4) Robot Java Development 0.1.0.201501221609
+
+The laptop has the same.
+
+The laptop also seems to have the same WPI plugins.
+
+** Note 4: Copying the claspath variables eliminated 3 of 4 build errors.  Remaining error is about the missing target "deploy."
