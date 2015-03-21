@@ -29,7 +29,7 @@ public class Arm{
 	 * @param l
 	 */
     public void move(Joystick l){
-		move(l.getRawButton(4),l.getRawButton(6)); // for buttons number six and 4 on the top of the joystick
+		move(l.getRawButton(6),l.getRawButton(4)); // for buttons number six and 4 on the top of the joystick
 	}
 	
     /**
@@ -42,7 +42,7 @@ public class Arm{
 		   bestTalonEber.set(.7);
 		}
 		else if(down && !low.get()){
-		   bestTalonEber.set(-.7);
+		   bestTalonEber.set(-.5);
 		}else{
 			bestTalonEber.set(0);
 		}

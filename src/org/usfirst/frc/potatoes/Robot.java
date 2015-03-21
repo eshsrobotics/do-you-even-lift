@@ -84,6 +84,7 @@ public class Robot extends IterativeRobot {
     		theta += (leftStick.getZ()- deadBand);
     	}
     	error = gyro.getAngle()-error-theta;
+    	System.out.println(error);
     	// Previously we had "error /= 10" here.  Know what happened?  Everyone screamed and hid their children.  err ma gerrd
     	error /= 10;
     	error = turning.getValue(error);

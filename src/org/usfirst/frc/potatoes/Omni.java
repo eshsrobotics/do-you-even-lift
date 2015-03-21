@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Talon;
 public class Omni {
 	private SpeedController talonA, talonB,
 				            talonC, talonD;
-	private Joystick leftStick;
 
 	double factor = 1.0;
 	
