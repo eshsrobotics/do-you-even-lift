@@ -3,6 +3,10 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * 
@@ -25,6 +29,7 @@ public class Robot extends IterativeRobot {
     Debounce turn;
     Calibration calibration;
     PID turning;
+    CommandGroup autoCom;
     
     
     public void robotInit() {
@@ -49,11 +54,16 @@ public class Robot extends IterativeRobot {
     	
     	//gyro
         calibration = new Calibration(gyro);
-        
-        turning = new PID(.003,.5,.2);      
+        turning = new PID(.003,.5,.2);
+        autoCom = new AutoCom(omni, arm);
+    }
+    
+    public void autonomousInit(){
+    	autoCom.start();
     }
     
     public void autonomousPeriodic() {
+      Scheduler.getInstance().run();    	
     }
      
     public void teleopInit() {

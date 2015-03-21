@@ -13,6 +13,6 @@ https://wpilib.screenstepslive.com/s/4485/m/13809/l/145002-installing-eclipse-c-
 Noticed a discrepancy between "Window -> Preferences -> Java -> Build Path -> Classpath Variables" on the two systems.  On the desktop, these four variables are defined:
 
 	networktables: C:/Users/pltwe5/wpilib/java/current/lib/NetworkTables.jar
-	networktables.sources: C:/Users/pltwe5/wpilib/java/current/lib/NetworkTables-sources.jar
-	wpilib: C:/Users/pltwe5/wpilib/java/current/lib/WPILib.jar
-	wpilib.sources: C:/Users/pltwe5/wpilib/java/current/lib/WPILib-sources.jar
+	networktables.sources: C:/Users/jcho/wpilib/java/current/lib/NetworkTables-sources.jar
+	wpilib: C:/Users/pltwe5/jcho/java/current/lib/WPILib.jar
+	wpilib.sources: C:/Users/jcho/wpilib/java/current/lib/WPILib-sources.jar
